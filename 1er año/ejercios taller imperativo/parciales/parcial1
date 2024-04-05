@@ -1,0 +1,91 @@
+programa parcial
+procesos 
+  proceso cuadrado(E lado: numero)
+  comenzar
+    repetir 4
+      repetir lado
+        mientras (HayFlorEnLaEsquina)  
+          tomarFlor
+        mover
+      mientras (HayFlorEnLaEsquina)  
+        tomarFlor
+      derecha
+  fin
+  proceso mensajes(E id: numero)
+  comenzar   
+    si (id = 1)
+      EnviarMensaje(V, r2)
+      EnviarMensaje(V, r3)
+    sino 
+      si (id = 2)
+        EnviarMensaje(V, r1)
+        EnviarMensaje(V, r3)
+      sino
+        EnviarMensaje(V, r1)
+        EnviarMensaje(V, r2)
+  fin
+  proceso depositarflores
+  variables
+    avact, caact: numero
+  comenzar
+    avact:= PosAv
+    caact:= PosCa
+    mientras (HayFlorEnLaBolsa)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      si (HayFlorEnLaBolsa)
+        depositarFlor
+      Pos(avact,caact)
+      LiberarEsquina(50,50)
+  fin
+  proceso mensajesc
+  comenzar
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    EnviarMensaje(3, r3)
+  fin
+areas
+  areacoordinador: AreaP(51,1,51,1)
+  areacompartida: AreaPC(50,50,50,50)
+  arear1: AreaP(1,1,6,26)
+  arear2: AreaP(8,1,13,26)
+  arear3: AreaP(15,1,21,26)
+robots
+  robot juntador
+  variables
+    id, lado,avact, caact: numero
+    barrera: boolean
+  comenzar
+    avact:= PosAv
+    caact:= PosCa
+    RecibirMensaje(id, coordi)
+    repetir 5
+      Random(lado,1,5)
+      cuadrado(lado)
+      mensajes(id)
+      Pos(PosAv, 1 + PosCa + lado)
+      repetir 2
+        RecibirMensaje(barrera, *)
+    depositarflores
+  fin
+  robot coordinador
+  comenzar
+    mensajesc
+  fin
+variables
+  r1,r2,r3: juntador
+  coordi: coordinador
+comenzar
+  AsignarArea(r1, arear1)
+  AsignarArea(r2, arear2)
+  AsignarArea(r3, arear3)
+  AsignarArea(coordi, areacoordinador)
+  AsignarArea(r1, areacompartida)
+  AsignarArea(r2, areacompartida)
+  AsignarArea(r3, areacompartida)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 8,1)
+  Iniciar(r3, 15,1)
+  Iniciar(coordi, 51,1)
+fin
+      

@@ -1,0 +1,64 @@
+programa ej5
+areas
+  arear1: AreaP(4,1,4,100)
+  arear2: AreaP(6,1,6,100)
+  arear3: AreaP(8,1,8,100)      
+  arear4: AreaP(10,1,10,100)
+  areac: AreaP(11,1,11,1)
+  arearecolerctar: AreaPC(11,11,11,11)
+robots
+  robot rcompetidor
+  variables
+    haypapel: boolean
+    avact,caact,id: numero
+  comenzar
+    RecibirMensaje(id, coordinador)
+    haypapel:= V
+    mientras ((haypapel) & (PosCa <> 100))
+      avact:= PosAv
+      caact:= PosCa
+      BloquearEsquina(11,11)
+      Pos(11,11)
+      si ((HayPapelEnLaEsquina) & (PosCa <> 99))  
+        tomarPapel
+        Pos(avact,caact)
+        LiberarEsquina(11,11)
+        depositarPapel
+        mover
+      sino
+        LiberarEsquina(11,11)
+        haypapel:= F
+        EnviarMensaje(id,coordinador)
+      si (PosCa = 100)
+        EnviarMensaje(id,coordinador)
+  fin
+  robot rcoordinador
+  variables
+    idact: numero
+  comenzar
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+    EnviarMensaje(4, robot4)
+    RecibirMensaje(idact, *)
+    Informar(id)   
+  fin
+variables
+  robot1,robot2,robot3,robot4: rcompetidor
+  coordinador: rcoordinador
+comenzar
+  AsignarArea(robot1, arear1)
+  AsignarArea(robot2, arear2)
+  AsignarArea(robot3, arear3)  
+  AsignarArea(robot4, arear4)
+  AsignarArea(robot1, arearecolerctar)
+  AsignarArea(robot2, arearecolerctar)
+  AsignarArea(robot3, arearecolerctar)  
+  AsignarArea(robot4, arearecolerctar)
+  AsignarArea(coordinador, areac)
+  Iniciar(robot1, 4,1)
+  Iniciar(robot2, 6,1)
+  Iniciar(robot3, 8,1)  
+  Iniciar(robot4, 10,1)
+  Iniciar(coordinador, 11,1)
+fin

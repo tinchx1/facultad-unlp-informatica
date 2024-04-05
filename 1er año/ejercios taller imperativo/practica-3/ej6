@@ -1,0 +1,52 @@
+programa ej6
+procesos 
+  proceso cuadranter1
+  comenzar
+    repetir 4
+      repetir 6
+        mientras (HayFlorEnLaEsquina)
+          tomarFlor
+        mover
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+      derecha
+  fin
+  proceso cuadranter2
+  comenzar
+    repetir 4
+      repetir 10
+        mientras ((HayFlorEnLaEsquina) && (HayPapelEnLaEsquina))
+          tomarFlor
+          tomarPapel
+        mover
+      mientras ((HayFlorEnLaEsquina) && (HayPapelEnLaEsquina))
+        tomarFlor
+        tomarPapel
+      derecha
+  fin
+  proceso cuadranter3
+  comenzar
+    repetir 4
+      repetir 7
+        mientras (HayPapelEnLaEsquina)
+          tomarPapel
+        mover
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+      derecha
+  fin
+areas
+  arear1: AreaP(2,2,8,8)
+  arear2: AreaP(5,5,15,15)
+  arear3: AreaP(9,9,16,16)
+  areadepositar: AreaPC(1,20,22,100)  
+  areafiscal: AreaP(1,1,1,1)
+robots
+  robot robot1
+  variables
+    id: numero
+  comenzar
+    cuadranter1
+    RecibirMensaje(id, fiscal)
+    EnviarMensaje(id,fiscal)
+  fin

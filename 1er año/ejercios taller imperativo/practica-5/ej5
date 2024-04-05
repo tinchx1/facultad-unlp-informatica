@@ -1,0 +1,97 @@
+programa ej5
+areas
+  arear1: AreaP(10,1,10,1)
+  arear2: AreaP(11,1,11,1)
+  arear3: AreaP(12,1,12,1)
+  areaservidor: AreaP(13,1,13,1)
+  areacompartida: AreaC(100,1,100,1)
+robots
+  robot cliente
+  variables
+    papeles, caact,avact id: numero
+  comenzar
+    caact:= PosCa
+    avact:= PosAv
+    RecibirMensaje(id, servidor)
+    repetir 4
+      EnviarMensaje(id, servidor)
+      EnviarMensaje(V, servidor)
+      RecibirMensaje(papeles, servidor)
+      repetir papeles
+        BloquearEsquina(100,1)
+        Pos(100,1)
+        tomarPapel
+        Pos(avact,caact)
+        LiberarEsquina(100,1)
+        depositarPapel
+    EnviarMensaje(F, servidor)
+  fin
+  robot rservidor
+  variables
+    id, papeles,terminaron: numero
+    estado: boolean
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    mientras (terminaron < 4)
+      Random(papeles,1,4)
+      RecibirMensaje(id, *)
+      si (id = 1)
+        RecibirMensaje(estado,r1)
+        si (estado)
+          BloquearEsquina(100,1)
+          Pos(100,1)
+          repetir papeles
+            depositarPapel
+          Pos(13,1)
+          LiberarEsquina(100,1)
+          EnviarMensaje(papeles, r1)
+        sino
+          terminaron:= terminaron + 1
+      sino
+        si (id = 2)
+          RecibirMensaje(estado,r2)
+          si (estado)
+            BloquearEsquina(100,1)
+            Pos(100,1)
+            repetir papeles
+              depositarPapel
+            Pos(13,1)
+            LiberarEsquina(100,1)
+            EnviarMensaje(papeles, r2)
+          sino
+            terminaron:= terminaron + 1
+        sino
+          RecibirMensaje(estado,r3)
+          si (estado)
+            BloquearEsquina(100,1)
+            Pos(100,1)
+            repetir papeles
+              depositarPapel
+            Pos(13,1)
+            LiberarEsquina(100,1)
+            EnviarMensaje(papeles, r3)
+          sino
+            terminaron:= terminaron + 1
+  fin
+variables
+  r1,r2,r3: cliente
+  servidor: rservidor
+comenzar
+  AsignarArea(r1,arear1)
+  AsignarArea(r2,arear2)
+  AsignarArea(r3,arear3)
+  AsignarArea(servidor,areaservidor)
+  AsignarArea(r1,areacompartida)
+  AsignarArea(r2,areacompartida)
+  AsignarArea(r3,areacompartida)
+  AsignarArea(servidor,areacompartida)
+  Iniciar(r1,10,1)
+  Iniciar(r2,11,1)
+  Iniciar(r3,12,1)
+  Iniciar(servidor,13,1)
+fin
+
+    
+    

@@ -1,0 +1,101 @@
+programa ej5
+procesos
+  proceso robot1proceso
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    repetir 14
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+      mover
+    mientras (HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+  proceso robot2proceso
+  variables
+    papeles: numero
+  comenzar
+    papeles:= 0
+    repetir 20
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+      mover
+    mientras (HayPapelEnLaBolsa)
+      depositarPapel
+  fin
+  proceso robot3proceso
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    repetir 30
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+      mover
+    mientras (HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+  proceso robot4proceso
+  variables
+    papeles: numero
+  comenzar
+    papeles:= 0
+    repetir 9
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+      mover
+    mientras (HayPapelEnLaBolsa)
+      depositarPapel
+  fin
+areas
+  area1: AreaP(1,75,15,80)
+  area2: AreaP(75, 80, 80, 100)
+  area3: AreaP(70, 10, 100, 15)
+  area4: AreaP(10, 1, 15, 10)
+robots
+  robot robot1
+  comenzar
+    derecha
+    robot1proceso
+    Pos(1, 75)
+    robot1proceso
+  fin
+  robot robot2
+  comenzar
+    robot2proceso
+    Pos(80, 80)
+    robot2proceso
+  fin  
+  robot robot3
+  comenzar
+    derecha
+    robot3proceso
+    Pos(70,10)
+    robot3proceso
+  fin
+  robot robot4
+  comenzar
+    robot4proceso
+    Pos(15,1)
+    robot4proceso
+  fin
+variables
+  robotuno: robot1
+  robotdos: robot2
+  robottres: robot3
+  robotcuatro: robot4
+comenzar
+  AsignarArea(robotuno, area1)
+  AsignarArea(robotdos, area2)
+  AsignarArea(robottres, area3)
+  AsignarArea(robotcuatro, area4)
+  Iniciar(robotuno, 1, 80)
+  Iniciar(robotdos, 75,80)
+  Iniciar(robottres, 70,15)
+  Iniciar(robotcuatro, 10,1)
+fin
