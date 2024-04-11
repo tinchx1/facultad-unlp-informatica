@@ -1,0 +1,75 @@
+programa ej2
+procesos
+  proceso recta(E cant: numero;ES papeles: numero; ES flores: numero)
+  comenzar
+    repetir cant
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+      mover
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:= papeles + 1
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso escalon(ES cant: numero)
+  variables
+    alto, flores, papeles: numero
+  comenzar
+    papeles:= 0
+    flores:= 0
+    Random(alto,1,5)
+    recta(alto,papeles,flores)
+    derecha
+    recta(1,papeles,flores)
+    repetir 3
+      derecha
+    si (flores > papeles)
+      cant:= cant + 1
+  fin
+areas
+  area: AreaC(1,1,100,100)
+robots
+  robot acumulador
+  variables
+    cant, id: numero
+  comenzar
+    RecibirMensaje(id, fiscal)
+    cant:= 0
+    repetir 4
+      escalon(cant)
+    EnviarMensaje(id, fiscal)
+    EnviarMensaje(cant, fiscal)
+  fin
+  robot rfiscal
+  variables
+    idact, cantact, total: numero
+  comenzar
+    EnviarMensaje(1,robot1)
+    EnviarMensaje(2,robot2)
+    EnviarMensaje(3,robot3)
+    total:= 0
+    repetir 3
+      RecibirMensaje(idact, *)
+      RecibirMensaje(cantact, *)
+      total:= total + cantact
+    Informar(total)
+  fin
+variables
+  robot1,robot2,robot3: acumulador
+  fiscal: rfiscal
+comenzar
+  AsignarArea(robot1, area)
+  AsignarArea(robot2, area)
+  AsignarArea(robot3, area)
+  AsignarArea(fiscal, area)
+  Iniciar(robot1, 2,1)
+  Iniciar(robot2, 7,2)
+  Iniciar(robot3, 12,2)
+  Iniciar(fiscal, 1,1)
+fin

@@ -1,0 +1,79 @@
+programa ej3
+procesos 
+  proceso moveryjuntar
+  variables
+    cantflores,cantavances: numero
+  comenzar
+    cantavances:= 0
+    cantflores:= 0
+    mientras ((cantavances < 5)&(cantflores < 10) & (PosAv < 100))
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        cantflores:= cantflores + 1
+      mover
+      cantavances:= cantavances + 1
+  fin
+  proceso depositar
+  variables
+    avact,caact: numero
+  comenzar
+    avact:= PosAv
+    caact:= PosCa
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras (HayFlorEnLaBolsa)
+      depositarFlor
+    Pos(avact, caact)
+    LiberarEsquina(10,10)
+    EnviarMensaje(V,cosechador)
+  fin
+areas
+  arear1: AreaP(1,3,100,3)
+  arear2: AreaP(1,4,100,4)
+  areacosechador: AreaP(1,5,1,5)
+  areacompartida: AreaC(10,10,10,10)
+robots
+  robot recolector
+  variables
+    avact,caact,: numero
+  comenzar
+    derecha
+    mientras (PosAv < 100)
+      moveryjuntar
+      depositar
+    EnviarMensaje(F,cosechador)
+  fin
+  robot rcosechador
+  variables
+    terminaron,flores: numero
+    continuar: boolean
+  comenzar
+    terminaron:= 0
+    mientras(terminaron < 2)
+      RecibirMensaje(continuar,*)
+      si (continuar)
+        BloquearEsquina(10,10)
+        Pos(10,10)
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          flores:= flores + 1
+        Pos(1,5)
+        LiberarEsquina(10,10)
+      sino
+        terminaron:= terminaron + 1
+    Informar(flores)
+  fin
+variables
+  r1,r2: recolector
+  cosechador: rcosechador
+comenzar
+  AsignarArea(r1,arear1)
+  AsignarArea(r2,arear2)
+  AsignarArea(cosechador,areacosechador)
+  AsignarArea(r1,areacompartida)
+  AsignarArea(r2,areacompartida)
+  AsignarArea(cosechador,areacompartida)
+  Iniciar(r1,1,3)
+  Iniciar(r2,1,4)
+  Iniciar(cosechador,1,5)
+fin

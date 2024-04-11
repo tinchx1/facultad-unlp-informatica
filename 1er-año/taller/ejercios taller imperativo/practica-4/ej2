@@ -1,0 +1,99 @@
+programa ej2
+areas
+  areap1: AreaP(5,1,5,100)
+  areap2: AreaP(10,1,10,100)
+  areacompartida: AreaC(50,50,50,50)
+  areac1: AreaP(11,1,11,1)
+  areac2: AreaP(12,1,12,1)
+robots
+  robot rproductor
+  variables
+    avact,caact, cantPapeles: numero
+  comenzar
+    cantPapeles:= 0
+    mientras (PosCa < 100)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        cantPapeles:= cantPapeles + 1
+        si (cantPapeles = 5)
+          avact:= PosAv
+          caact:= PosCa
+          cantPapeles:= 0
+          BloquearEsquina(50, 50)
+          Pos(50,50)
+          repetir 5
+            depositarPapel
+          Pos(avact, caact)
+          LiberarEsquina(50, 50)
+      mover  
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles:= cantPapeles + 1
+      si (cantPapeles = 5)
+        avact:= PosAv
+        caact:= PosCa
+        cantPapeles:= 0
+        BloquearEsquina(50, 50)
+        Pos(50,50)
+        repetir 5
+          depositarPapel
+        Pos(avact, caact)
+        LiberarEsquina(50, 50)
+  fin
+  robot rconsumidor
+  variables
+    intentos, avact,caact,cantpapeles, cantpapelesact: numero
+    cumple: boolean
+  comenzar
+    intentos:= 0
+    mientras (cumple < 8)
+      Random(cantpapeles, 2, 5)
+      cumple:= V
+      avact:= PosAv
+      caact:= PosCa
+      cantpapelesact:= 0
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      mientras ((cumple) && (cantpapelesact < cantpapeles))
+        si (HayPapelEnLaEsquina)
+          tomarPapel
+          cantpapelesact:= cantpapelesact + 1
+        sino
+          cumple:= F
+      si (~cumple)
+        repetir cantpapelesact
+          depositarPapel
+        Pos(avact,caact)
+        LiberarEsquina(50,50)
+      sino
+        Pos(avact,caact)
+        LiberarEsquina(50,50)
+        repetir cantpapeles
+          depositarPapel
+      si (~cumple)
+        cant:= cant + 1
+      sino
+        cant:= 0
+  fin
+variables
+  c1,c2: rconsumidor
+  p1,p2: rproductor
+comenzar
+  AsignarArea(c1,areac1)
+  AsignarArea(c2,areac2)
+  AsignarArea(p1,areap1)
+  AsignarArea(p2,areap2)    
+  AsignarArea(c1,areacompartida)
+  AsignarArea(c2,areacompartida)
+  AsignarArea(p1,areacompartida)
+  AsignarArea(p2,areacompartida)      
+  Iniciar(p1, 5,1)
+  Iniciar(p2, 10,1)
+  Iniciar(c1, 11,1)
+  Iniciar(c2, 12,1)
+fin
+          
+    
+      
+      
+  

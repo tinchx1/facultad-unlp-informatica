@@ -1,0 +1,108 @@
+programa ej1
+procesos
+  proceso mensajesc(E cant: numero; ES ack: boolean; E Id: numero)
+  comenzar
+    EnviarMensaje(Id, servidor)
+    EnviarMensaje(cant, servidor)
+    EnviarMensaje(PosAv, servidor)
+    EnviarMensaje(PosCa + 1, servidor)
+    RecibirMensaje(ack, servidor)
+  fin
+  proceso mensajesfinales(E Id: numero)
+  comenzar
+    EnviarMensaje(Id, servidor)
+    EnviarMensaje(0, servidor)
+  fin
+  proceso procesarc(ES cantflores: numero; ES ack: boolean; E id: numero)
+  comenzar  
+    mientras (PosCa < 100)
+      mensajesc(cantflores,ack,id)
+      si (ack)
+        Pos(PosAv,PosCa + 1)
+        mientras (HayFlorEnLaEsquina)
+          tomarFlor
+      Pos(PosAv,PosCa - 1)
+      repetir cantflores 
+        depositarFlor
+        mover  
+    si (HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+  proceso comunicarb(E mensaje: boolean; E id: numero)
+  comenzar
+    si (id = 1)
+      EnviarMensaje(mensaje,robot1)
+    sino
+      si (id = 2)
+        EnviarMensaje(mensaje,robot2)
+      sino
+        EnviarMensaje(mensaje,robot3)
+  fin
+  proceso procesarS(E id: numero; ES n: numero; ES terminaron: numero; ES av: numero; ES ca: numero)
+  comenzar
+    si (id = 1)
+      RecibirMensaje(av,robot1)
+      RecibirMensaje(ca,robot1)
+      RecibirMensaje(n, robot1)
+    sino
+      si (id = 2)
+        RecibirMensaje(av,robot2)
+        RecibirMensaje(ca,robot2)
+        RecibirMensaje(n, robot2)
+      sino
+        RecibirMensaje(av,robot3)
+        RecibirMensaje(ca,robot3)
+        RecibirMensaje(n, robot1)
+    si (n = 0)
+      terminado:= terminado + 1 
+      comunicarb(F, id)
+    sino
+      Pos(av, ca)
+      depositarFlor
+      Pos(100,100)
+      comunicarb(V, id)
+  fin
+areas
+  areaservidor: AreaP(100,100,100,100)
+  areac1: AreaP(1,1,1,100)
+  areac2: AreaP(2,1,2,100)
+  areac3: AreaP(3,1,3,100)
+robots
+  robot c1 
+  variables
+    id, cantFlores: numero
+    ACK: boolean
+  comenzar
+    id:= PosAv
+    Random(cantFlores, 1,4)
+    procesarc(cantFlores,ACK, id)
+    mensajesfinales(id)
+  fin
+  robot rservidor
+  variables
+    terminaron,id,av,ca, n: numero
+  comenzar
+    terminaron:= 0
+    mientras (terminaron < 3)
+      RecibirMensaje(id, *)
+      procesarS(id,n,terminaron,av,ca)
+  fin        
+variables
+  servidor: rservidor
+  robot1: cl
+  robot2: cl
+  robot3: cl
+comenzar
+  AsignarArea(robot1, areac1)
+  AsignarArea(robot2, areac2)
+  AsignarArea(robot3, areac3)
+  AsignarArea(servidor, areaservidor)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,2,1)
+  Iniciar(robot3,3,1)
+  Iniciar(servidor,100,100)
+fin
+
+            
+
+          
