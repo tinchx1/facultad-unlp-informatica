@@ -7,15 +7,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Incrementar"
+        android:onClick="handleClick"
         />
     <Button android:id="@+id/btnDecrementar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="handleClick"
         android:text="Decrementar"
         />
     <Button android:id="@+id/btnCancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancelar"
+        android:onClick="handleClick"
         />
 </LinearLayout>
