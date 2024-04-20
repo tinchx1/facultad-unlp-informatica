@@ -1,39 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {Una empresa posee un archivo con información de los ingresos percibcodos por diferentes
 empleados en concepto de comisión, de cada uno de ellos se conoce: código de empleado,
 nombre y monto de la comisión. La información del archivo se encuentra ordenada por

@@ -1,0 +1,3 @@
+Codigo: 102 Apellido: Rodriguez Nombre: Maria Cantidad de materias cursadas: 1 Cantidad de materias con finales aprobados: 3
+Codigo: 103 Apellido: Perez Nombre: Pedro Cantidad de materias cursadas: 3 Cantidad de materias con finales aprobados: 5
+Codigo: 
