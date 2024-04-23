@@ -1,8 +1,4 @@
 
-
-
-
-
 {A partir de información sobre la alfabetización en la Argentina, se necesita actualizar un
 archivo que contiene los siguientes datos: nombre de provincia, cantidad de personas
 alfabetizadas y total de encuestados. Se reciben dos archivos detalle provenientes de dos
