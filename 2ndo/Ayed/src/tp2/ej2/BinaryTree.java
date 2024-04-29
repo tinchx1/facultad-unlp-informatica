@@ -1,4 +1,4 @@
-package tp2.ej1;
+package tp2.ej2;
 
 
 
