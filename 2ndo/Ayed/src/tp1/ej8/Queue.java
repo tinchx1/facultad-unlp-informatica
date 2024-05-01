@@ -18,8 +18,8 @@ public class Queue<T> extends Sequence{
     public void enqueue(T dato) {
         data.add(dato);
     }
-    public void deenqueue(T dato) {
-        data.remove(0);
+    public T deenqueue() {
+        return data.remove(0);
     }
     public T head() {
         return data.get(0);
