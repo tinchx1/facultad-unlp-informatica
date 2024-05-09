@@ -10,6 +10,8 @@ import androidx.core.view.WindowInsetsCompat
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
+    lateinit var numberRandom: Number;
+    lateinit var dado: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,11 +21,23 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        dado = findViewById<TextView>(R.id.dado)
     }
     fun handleClick(view: View) {
-        val dado = findViewById<TextView>(R.id.dado)
         val random = Random()
         val number = random.nextInt(6) + 1
+        numberRandom = number
         dado.text = number.toString()
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("numberRandom", numberRandom.toInt())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        numberRandom = savedInstanceState.getInt("numberRandom");
+        dado.setText(numberRandom.toString());
+    }
+
 }
