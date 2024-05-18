@@ -1,0 +1,14 @@
+id: 0
+genero: 
+nombre: 
+duracion: 0
+director: 
+precio: 0.00
+------------
+id: 3
+genero: 3
+nombre: 3
+duracion: 3
+director: 3
+precio: 3.00
+------------
