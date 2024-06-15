@@ -120,6 +120,7 @@ Begin
   close(txt);
 End;
 
+
 Var 
   txt: Text;
   m: maestro;

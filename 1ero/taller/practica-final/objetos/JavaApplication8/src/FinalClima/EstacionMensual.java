@@ -19,8 +19,12 @@ public class EstacionMensual extends Estacion {
         this.temperaturas = new double[años][12];
     }
 
-    @Override
     public void agregarPromedio(double tiempo, double temperatura) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String maximo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
