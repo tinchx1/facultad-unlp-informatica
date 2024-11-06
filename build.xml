@@ -1,0 +1,5 @@
+<target name="compile">
+    <javac srcdir="src" destdir="build/classes">
+        <exclude name="Seminario-kotlin-android/**"/>
+    </javac>
+</target>
