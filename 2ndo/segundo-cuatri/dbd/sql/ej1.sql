@@ -100,3 +100,10 @@ FROM cliente c
 inner join facturas f on (f.idCliente = c.idCLiente)
 group by c.idCliente
 HAVING SUM(f.total) > 100000
+
+
+/* Ejercicio 1
+Cliente (idCliente, nombre, apellido, DNI, telefono, direccion)
+Factura (nroTicket, total, fecha, hora, idCliente (fk))
+Detalle (nroTicket (fk), idProducto (fk), cantidad, preciounitario)
+Producto (idProducto, nombreP, descripcion, precio, stock) */ 
