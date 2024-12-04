@@ -69,7 +69,7 @@ SELECT p.DNI
 FROM podador p
 INNER JOIN poda pod ON (p.DNI = pod.DNI)
 INNER JOIN arbol a ON (a.nroArbol = pod.nroArbol)
-WHERE a.especie <> 'Coníferas
+WHERE a.especie <> 'Coníferas'
 )
 /* 7. Listar especies de árboles que se encuentren en la localidad de ‘La Plata’ y también en la
 localidad de ‘Salta’. */
